@@ -25,10 +25,13 @@ class TestDeleteSavedSearch():
         return response
 
     def test_delete_saved_search(self, saved_search):
-        """Tests deleting a saved search"""
+        """Tests deleting a saved search and the seach is not existent anymore"""
         id = saved_search['id']
         res = APIHelper.delete_saved_search(self, search_id=id, auth=self.auth)
         assert res.status_code == 204
+
+        get_saved_search = APIHelper.get_saved_search(self, search_id=id, auth=self.auth)
+        assert get_saved_search.status_code == 404
 
     def test_delete_non_existent_saved_search(self, saved_search):
         """Tests deleteing a saved search with incorrect id"""

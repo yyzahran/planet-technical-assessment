@@ -76,3 +76,38 @@ class TestCreateSavedSearch():
         print(res.json())
         assert res.json()['__daily_email_enabled'] == False
         assert res.status_code == 200
+
+    def test_name_has_to_be_string(self, json_data):
+        """Tests that name field has to be a string"""
+        json_data['name'] = 1234
+        res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
+    def test_daily_email_enabled_has_to_be_string(self, json_data):
+        """Tests that __daily_email_enabled field has to be a boolean"""
+        json_data['__daily_email_enabled'] = "True"
+        res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
+    def test_asset_types_has_to_be_string(self, json_data):
+        """Tests that asset_types field has to be an array"""
+        json_data['asset_types'] = "string"
+        res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
+    def test_item_types_has_to_be_string(self, json_data):
+        """Tests that item_types field has to be an array"""
+        json_data['item_types'] = "list"
+        res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
+    def test_filter_has_to_be_string(self, json_data):
+        """Tests that filter field has to be of a dict"""
+        json_data['name'] = ['item 1', 'item 2']
+        res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
