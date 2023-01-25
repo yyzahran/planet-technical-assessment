@@ -8,7 +8,7 @@ from modules.APIHelper import APIHelper
 
 class TestCreateSavedSearch():
 
-    SAVED_SEARCH_BASE_URL = "https://api.planet.com/data/v1/searches/"
+    SAVED_SEARCH_BASE_URL = "https://api.planet.com/data/v1/searches"
     auth = HTTPBasicAuth(API_KEY, '')
 
     @pytest.fixture
@@ -54,6 +54,12 @@ class TestCreateSavedSearch():
         print(res.json())
         assert res.status_code == 400
 
+    def test_create_saved_search_without_request_body_returns_error(self):
+        """Tests creating a saved search rqueires a request body"""
+        res = APIHelper.create_saved_search(self, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
     def test_create_saved_search_without_asset_types_is_ok(self, json_data):
         """Tests creating a saved search without the asset_types field is ok
         as this field is not required"""
@@ -64,8 +70,9 @@ class TestCreateSavedSearch():
 
     def test_create_saved_search_without_daily_email_enabled_is_ok(self, json_data):
         """Tests creating a saved search without the __daily_email_enabled field is ok
-        as this field is not required"""
+        as this field is not required. Default value is false"""
         json_data.pop('__daily_email_enabled')
         res = APIHelper.create_saved_search(self, json=json_data, auth=self.auth)
         print(res.json())
+        assert res.json()['__daily_email_enabled'] == False
         assert res.status_code == 200

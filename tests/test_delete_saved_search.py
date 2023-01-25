@@ -8,7 +8,7 @@ from modules.APIHelper import APIHelper
 
 class TestDeleteSavedSearch():
 
-    SAVED_SEARCH_BASE_URL = "https://api.planet.com/data/v1/searches/"
+    SAVED_SEARCH_BASE_URL = "https://api.planet.com/data/v1/searches"
     auth = HTTPBasicAuth(API_KEY, '')
 
     @pytest.fixture
