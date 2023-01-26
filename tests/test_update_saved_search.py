@@ -29,7 +29,6 @@ class TestUpdateSavedSearch(TestBase):
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
         assert saved_search.status_code == 200
-        saved_search = saved_search.json()
 
         updated_saved_search = APIHelper.update_saved_search(
             self, json=json_data, search_id=id)
@@ -43,7 +42,6 @@ class TestUpdateSavedSearch(TestBase):
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
         assert saved_search.status_code == 200
-        saved_search = saved_search.json()
 
         new_value = 'Updated saved search name'
         updated_json_body = json_data
@@ -64,7 +62,6 @@ class TestUpdateSavedSearch(TestBase):
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
         assert saved_search.status_code == 200
-        saved_search = saved_search.json()
 
         new_value = False
         updated_json_body = json_data
@@ -73,13 +70,43 @@ class TestUpdateSavedSearch(TestBase):
 
         updated_saved_search = APIHelper.update_saved_search(
             self, json=json_data, search_id=id, auth=self.auth)
-        assert updated_saved_search.json(
-        )['__daily_email_enabled'] == new_value, f"Field was not updated, expected {new_value}, instead found {updated_saved_search['__daily_email_enabled']}."
+        assert updated_saved_search.json()['__daily_email_enabled'] == new_value, \
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['__daily_email_enabled']}."
         assert updated_saved_search.status_code == 200
 
-    # def test_update_filter_field(self, new_saved_search):
-    #     """Tests updating filter field of an already-existing saved search"""
-    #     id = new_saved_search['id']
+    def test_update_filter_field(self, new_saved_search, json_data):
+        """Tests updating filter field of an already-existing saved search"""
+        id = new_saved_search['id']
+        print(f"Search id is {id}")
+        print(f"Current saved search \n{new_saved_search}")
+
+        new_value = {
+            "type": "AndFilter",
+            "config": [
+                {
+                    "type": "AssetFilter",
+                    "config": [
+                        "analytic_sr"
+                    ]
+                },
+                {
+                    "type": "AssetFilter",
+                    "config": [
+                        "udm2"
+                    ]
+                }
+            ]
+        }
+
+        updated_json_body = json_data
+        updated_json_body['filter'] = new_value
+        print(f"Updated saved search \n{updated_json_body}")
+
+        updated_saved_search = APIHelper.update_saved_search(
+            self, json=json_data, search_id=id, auth=self.auth)
+        assert updated_saved_search.json()['filter'] == new_value, \
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['filter']}."
+        assert updated_saved_search.status_code == 200
 
     def test_update_asset_types_field(self, new_saved_search, json_data):
         """Tests updating asset_types field of an already-existing saved search"""
@@ -89,7 +116,6 @@ class TestUpdateSavedSearch(TestBase):
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
         assert saved_search.status_code == 200
-        saved_search = saved_search.json()
 
         new_value = ["ortho_analytic_8b_xml", "ortho_udm2", "ortho_visual"]
         updated_json_body = json_data
@@ -98,6 +124,6 @@ class TestUpdateSavedSearch(TestBase):
 
         updated_saved_search = APIHelper.update_saved_search(
             self, json=json_data, search_id=id, auth=self.auth)
-        assert updated_saved_search.json(
-        )['asset_types'] == new_value, f"Field was not updated, expected {new_value}, instead found {updated_saved_search['asset_types']}."
+        assert updated_saved_search.json()['asset_types'] == new_value, \
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['asset_types']}."
         assert updated_saved_search.status_code == 200

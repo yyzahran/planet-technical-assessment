@@ -2,30 +2,82 @@
     "name": "Saved seach example 2",
     "__daily_email_enabled": false,
     "asset_types": [
-        "basic_analytic_4b",
-        "basic_analytic_4b_rpc",
-        "basic_analytic_4b_xml"
+        "basic_udm2",
+        "ortho_analytic_4b",
+        "ortho_analytic_4b_sr"
     ],
     "item_types": [
         "PSScene"
     ],
-    "filter": {
-        "type": "AndFilter",
-        "config": [
-            {
-                "type": "DateRangeFilter",
-                "field_name": "acquired",
-                "config": {
-                    "gte": "2020-01-01T00:00:00Z",
-                    "lte": "2020-01-31T00:00:00Z"
-                }
-            },
-            {
-                "type": "AssetFilter",
-                "config": [
-                    "analytic_sr"
-                ]
-            }
+    "filter":{
+        "type":"AndFilter",
+        "config":[
+           {
+              "type":"GeometryFilter",
+              "field_name":"geometry",
+              "config":{
+                 "type":"Polygon",
+                 "coordinates":[
+                    [
+                       [
+                          6.067543029785156,
+                          45.859890320433756
+                       ],
+                       [
+                          6.1969757080078125,
+                          45.859890320433756
+                       ],
+                       [
+                          6.1969757080078125,
+                          45.95831029909359
+                       ],
+                       [
+                          6.067543029785156,
+                          45.95831029909359
+                       ],
+                       [
+                          6.067543029785156,
+                          45.859890320433756
+                       ]
+                    ]
+                 ]
+              }
+           },
+           {
+              "type":"DateRangeFilter",
+              "field_name":"acquired",
+              "config":{
+                 "gte":"2022-04-14T00:00:00Z",
+                 "lte":"2022-04-15T00:00:00Z"
+              }
+           },
+           {
+              "type":"StringInFilter",
+              "field_name":"quality_category",
+              "config":[
+                 "standard"
+              ]
+           },
+           {
+              "type":"AssetFilter",
+              "config":[
+                 "ortho_analytic_8b"
+              ]
+           },
+           {
+              "type":"RangeFilter",
+              "config":{
+                 "gte":0,
+                 "lte":0.6
+              },
+              "field_name":"cloud_cover"
+           },
+           {
+              "type":"PermissionFilter",
+              "config":[
+                 "assets:download"
+              ]
+           }
         ]
     }
 }

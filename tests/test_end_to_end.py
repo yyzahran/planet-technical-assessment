@@ -42,10 +42,8 @@ class TestEndToEnd(TestBase):
 
     @pytest.mark.depends(on=['test_create_saved_search'])
     def test_delete_saved_search(self):
-        res = APIHelper.delete_saved_search(
-            self, search_id=ValueStorage.id, auth=self.auth)
+        res = APIHelper.delete_saved_search(self, search_id=ValueStorage.id, auth=self.auth)
         assert res.status_code == 204
 
-        get_saved_search = APIHelper.get_saved_search(
-            self, search_id=ValueStorage.id, auth=self.auth)
+        get_saved_search = APIHelper.get_saved_search(self, search_id=ValueStorage.id, auth=self.auth)
         assert get_saved_search.status_code == 404, "Expected saved search to be deleted, instead it was found."

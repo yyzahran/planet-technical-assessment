@@ -101,6 +101,6 @@ Check the following for more info:
 
 Youssef Zahran - youssefyzahran@gmail.com - [LinkedIn](https://www.linkedin.com/in/youssef-zahran-15894772/)
 
-Project link: [https://github.com/yyzahran/technical-assessment](https://github.com/yyzahran/technical-assessment)
+Project link: [https://github.com/yyzahran/planet-technical-assessment](https://github.com/yyzahran/planet-technical-assessment)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
