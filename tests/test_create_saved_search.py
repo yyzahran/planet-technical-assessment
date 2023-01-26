@@ -21,6 +21,10 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 200
 
+        saved_search = APIHelper.get_saved_search(
+            self, search_id=res.json()['id'], auth=self.auth)
+        assert saved_search.status_code == 200
+
     def test_create_saved_search_without_name_returns_error(self, json_data):
         """Tests creating a saved search without the name field returns an error
         as this field is required"""
@@ -63,6 +67,10 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 200
 
+        saved_search = APIHelper.get_saved_search(
+            self, search_id=res.json()['id'], auth=self.auth)
+        assert saved_search.status_code == 200
+
     def test_create_saved_search_without_daily_email_enabled_is_ok(self, json_data):
         """Tests creating a saved search without the __daily_email_enabled field is ok
         as this field is not required. Default value is false"""
@@ -72,6 +80,10 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.json()['__daily_email_enabled'] == False
         assert res.status_code == 200
+
+        saved_search = APIHelper.get_saved_search(
+            self, search_id=res.json()['id'], auth=self.auth)
+        assert saved_search.status_code == 200
 
     def test_name_has_to_be_string(self, json_data):
         """Tests that name field has to be a string"""
