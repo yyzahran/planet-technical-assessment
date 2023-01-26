@@ -10,6 +10,9 @@ auth = HTTPBasicAuth(API_KEY, '')
 
 @pytest.fixture
 def json_data():
-    with open('TestFiles/ExampleBody.json', 'r') as f:
+    with open('TestFiles/ExampleBody1.json', 'r') as f:
         data = json.load(f)
         return data
+
+class ValueStorage():
+    saved_search = None

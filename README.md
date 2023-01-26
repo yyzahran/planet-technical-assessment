@@ -42,7 +42,7 @@ This section is to walk you through the setup for running the tests.
 
 ### Prerequisites
 
-You'll need Python3 to run the project
+You'll need Python 3+ to run the project.
 
 ### Installation
 
@@ -59,6 +59,8 @@ You'll need Python3 to run the project
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+In `constants.py`, update the value of `PL_API_KEY` with the proper API key. It isn't included in the repository for security reasons.
 
 Use any of the following commands to run tests as needed:
 - Run tests using pytest with verbose

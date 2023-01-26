@@ -1,5 +1,4 @@
 import pytest
-import json
 
 from modules.APIHelper import APIHelper
 from test_base import TestBase
@@ -21,7 +20,7 @@ class TestDeleteSavedSearch(TestBase):
         assert res.status_code == 204
 
         get_saved_search = APIHelper.get_saved_search(self, search_id=id, auth=self.auth)
-        assert get_saved_search.status_code == 404
+        assert get_saved_search.status_code == 404, "Expected saved search to be deleted, instead it was found."
 
     def test_delete_non_existent_saved_search(self, new_saved_search):
         """Tests deleteing a saved search with incorrect id"""
