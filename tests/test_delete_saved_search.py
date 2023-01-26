@@ -8,12 +8,6 @@ from test_base import TestBase
 class TestDeleteSavedSearch(TestBase):
 
     @pytest.fixture
-    def json_data(self):
-        with open('TestFiles/ExampleBody.json', 'r') as f:
-            data = json.load(f)
-        return data
-
-    @pytest.fixture
     def new_saved_search(self, json_data):
         res = APIHelper.create_saved_search(
             self, json=json_data, auth=self.auth)

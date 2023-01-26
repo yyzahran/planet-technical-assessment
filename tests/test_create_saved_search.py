@@ -7,12 +7,6 @@ from test_base import TestBase
 
 class TestCreateSavedSearch(TestBase):
 
-    @pytest.fixture
-    def json_data(self):
-        with open('TestFiles/ExampleBody.json', 'r') as f:
-            data = json.load(f)
-        return data
-
     def test_create_saved_search_without_auth(self, json_data):
         """Tests creating a saved search with proper authentication"""
         res = APIHelper.create_saved_search(self, json=json_data)
@@ -87,7 +81,7 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 400
 
-    def test_daily_email_enabled_has_to_be_string(self, json_data):
+    def test_daily_email_enabled_has_to_be_boolean(self, json_data):
         """Tests that __daily_email_enabled field has to be a boolean"""
         json_data['__daily_email_enabled'] = "True"
         res = APIHelper.create_saved_search(
@@ -95,7 +89,7 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 400
 
-    def test_asset_types_has_to_be_string(self, json_data):
+    def test_asset_types_has_to_be_list(self, json_data):
         """Tests that asset_types field has to be an array"""
         json_data['asset_types'] = "string"
         res = APIHelper.create_saved_search(
@@ -103,7 +97,15 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 400
 
-    def test_item_types_has_to_be_string(self, json_data):
+    def test_asset_types_has_to_be_valid(self, json_data):
+        """Tests that asset_types field has to be of valid data"""
+        json_data['asset_types'] = ["asset_type_1", "asset_type_2", "asset_type_3"]
+        res = APIHelper.create_saved_search(
+            self, json=json_data, auth=self.auth)
+        print(res.json())
+        assert res.status_code == 400
+
+    def test_item_types_has_to_be_array(self, json_data):
         """Tests that item_types field has to be an array"""
         json_data['item_types'] = "list"
         res = APIHelper.create_saved_search(
@@ -111,7 +113,7 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 400
 
-    def test_filter_has_to_be_string(self, json_data):
+    def test_filter_has_to_be_dict(self, json_data):
         """Tests that filter field has to be of a dict"""
         json_data['name'] = ['item 1', 'item 2']
         res = APIHelper.create_saved_search(
