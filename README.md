@@ -8,7 +8,6 @@
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -22,11 +21,9 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#notes">Notes</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 This is Python/Pytest-based project that automates testing creating, updating, and deleting saved searches as outlined by Planet.
@@ -35,7 +32,6 @@ For more about the through process of going through the project, please check <a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This section is to walk you through the setup for running the tests.
@@ -57,7 +53,6 @@ You'll need Python 3+ to run the project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 In `constants.py`, update the value of `PL_API_KEY` with the proper API key. It isn't included in the repository for security reasons.
@@ -84,19 +79,6 @@ For more info about pytest's usage, check the [documentation](https://docs.pytes
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Notes
-
-The project was developed and tested on macOS, and tested on Linux Ubuntu.
-
-The webdriver files included with the project are `chromedeiver` version 108 and `geckodriver` version 32 for macOS. If you have other versions of these browsers, make sure to replace the existing drivers with the compatible ones.
-
-Check the following for more info:
-- https://chromedriver.chromium.org/downloads
-- https://github.com/mozilla/geckodriver/releases
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
 ## Contact
 
 Youssef Zahran - youssefyzahran@gmail.com - [LinkedIn](https://www.linkedin.com/in/youssef-zahran-15894772/)
