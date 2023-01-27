@@ -30,7 +30,7 @@ class TestEndToEnd(TestBase):
         assert saved_search.status_code == 200
 
     @pytest.mark.depends(on=['test_create_saved_search'])
-    def test_update_saved_search(self, new_request_body):
+    def test_update_saved_search(self, new_request_body, json_data):
         """Tests updating multiple fields in saved search created in test_create_saved_search"""
         updated_json_body = new_request_body
         updated_saved_search = APIHelper.update_saved_search(
@@ -42,7 +42,7 @@ class TestEndToEnd(TestBase):
         assert updated_json_body['asset_types'] == new_request_body['asset_types']
         assert updated_json_body['__daily_email_enabled'] == new_request_body['__daily_email_enabled']
 
-    @pytest.mark.depends(on=['test_create_saved_search'])
+    @pytest.mark.depends(on=['test_update_saved_search'])
     def test_delete_saved_search(self):
         """Tests deleting saved search created in test_create_saved_search"""
         res = APIHelper.delete_saved_search(self, search_id=ValueStorage.id, auth=self.auth)

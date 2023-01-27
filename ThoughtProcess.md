@@ -8,6 +8,7 @@ Here I'll walk you through the approach I took while working on the assessment.
     </li>
     <li><a href="#project-structure">Project Structure</a></li>
     <li><a href="#approach">Approach</a></li>
+    <li><a href="#notes">Notes</a></li>
     <li>
       <a href="#challenges">Challenges</a>
       <ul>
@@ -42,7 +43,7 @@ After reading the guide and the documentation provided. I did some manual testin
 
 - `conftest.py` is the pytest configuration file. I added global fixtures there to prevent duplication in the test files and added a variables storage class so I can use the saved search id across multiple tests.
 
-- `constants.py` has the API Key ONLY locally for security.
+- `constants.py` has the API Key ONLY locally.
 <br />
 
 ### Approach
@@ -56,7 +57,14 @@ For the `update` tests, I opted for editing/updating fields in the tests as need
 
 Lastly, I added jsonschema validation methods and assertions to verify the reponse schema when creating a saved search.
 
+<br />
+
+### Notes
+
 The API Key is not on the repository for security, so that only those who have the API key can use the tests and connect to the API endpoints.
+
+I did not add tests to udpate `item_type` value as it the type was explicitly mentioned in the quide as PSSense.
+
 <br />
 
 ## Challenges

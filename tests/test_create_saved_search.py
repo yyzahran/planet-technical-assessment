@@ -8,8 +8,8 @@ from test_base import TestBase
 class TestCreateSavedSearch(TestBase):
 
     def validate_get_response_schema(self, instance, reponse_schema):
-        """Helper function to validate the response schema upon
-        GET request a created saved search"""
+        """Helper function to validate the response schema when
+        GETing a created saved search"""
         try:
             validate(instance=instance, schema=reponse_schema)
         except jsonschema.exceptions.ValidationError as err:
@@ -17,7 +17,7 @@ class TestCreateSavedSearch(TestBase):
         return True
 
     def test_create_saved_search_without_auth(self, json_data):
-        """Tests creating a saved search with proper authentication"""
+        """Tests creating a saved search without proper authentication returns error"""
         res = APIHelper.create_saved_search(self, json=json_data)
         print(res.json())
         assert res.json()['message'] == 'Please enter a valid API key.'
@@ -64,7 +64,7 @@ class TestCreateSavedSearch(TestBase):
         assert res.status_code == 400
 
     def test_create_saved_search_without_request_body_returns_error(self):
-        """Tests creating a saved search rqueires a request body"""
+        """Tests creating a saved search requires a request body"""
         res = APIHelper.create_saved_search(self, auth=self.auth)
         print(res.json())
         assert res.status_code == 400
@@ -116,7 +116,7 @@ class TestCreateSavedSearch(TestBase):
         print(res.json())
         assert res.status_code == 400
 
-    def test_asset_types_has_to_be_list(self, json_data):
+    def test_asset_types_has_to_be_array(self, json_data):
         """Tests that asset_types field has to be an array"""
         json_data['asset_types'] = "string"
         res = APIHelper.create_saved_search(

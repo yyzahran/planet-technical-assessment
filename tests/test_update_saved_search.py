@@ -23,7 +23,6 @@ class TestUpdateSavedSearch(TestBase):
     def test_udpate_saved_search_without_auth_returns_error(self, new_saved_search, json_data):
         """Tests authorization is required to update a saved search"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
@@ -36,23 +35,21 @@ class TestUpdateSavedSearch(TestBase):
     def test_update_name_field(self, new_saved_search, json_data):
         """Tests updating name field of an already-existing saved search"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
         assert saved_search.status_code == 200
 
-        new_value="Updated saved search name"
+        new_value = "Updated saved search name"
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='name',
                                             new_value=new_value)
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json(
-        )['name'] == new_value, f"Field was not updated, expected {new_value}, instead found {updated_saved_search['name']}."
+        )['name'] == new_value, f"Field was not updated, expected {new_value}, instead found {updated_saved_search.json()['name']}."
 
     def test_update_daily_email_enabled_field(self, new_saved_search, json_data):
         """Tests updating __daily_email_enabled field of an already-existing saved search"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
@@ -63,12 +60,11 @@ class TestUpdateSavedSearch(TestBase):
                                             new_value=new_value)
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json()['__daily_email_enabled'] == new_value, \
-            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['__daily_email_enabled']}."
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search.json()['__daily_email_enabled']}."
 
     def test_update_filter_field(self, new_saved_search, json_data):
         """Tests updating filter field of an already-existing saved search"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
 
         new_value = {
@@ -92,12 +88,11 @@ class TestUpdateSavedSearch(TestBase):
                                             new_value=new_value)
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json()['filter'] == new_value, \
-            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['filter']}."
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search.json()['filter']}."
 
     def test_update_asset_types_field(self, new_saved_search, json_data):
         """Tests updating asset_types field of an already-existing saved search"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
@@ -107,14 +102,13 @@ class TestUpdateSavedSearch(TestBase):
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='asset_types',
                                             new_value=new_value)
         assert updated_saved_search.json()['asset_types'] == new_value, \
-            f"Field was not updated, expected {new_value}, instead found {updated_saved_search['asset_types']}."
+            f"Field was not updated, expected {new_value}, instead found {updated_saved_search.json()['asset_types']}."
         assert updated_saved_search.status_code == 200
 
     def test_update_name_field_with_invalid_value_returns_error(self, new_saved_search, json_data):
         """Tests updating name field of an already-existing saved search
         with an invalid value returns error"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
@@ -129,7 +123,6 @@ class TestUpdateSavedSearch(TestBase):
         """Tests updating __daily_email_enabled field of an already-existing saved search
         with an invalid value returns error"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
@@ -144,10 +137,12 @@ class TestUpdateSavedSearch(TestBase):
         """Tests updating filter field of an already-existing saved search
         with an invalid value returns error"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
+        saved_search = APIHelper.get_saved_search(
+            self, search_id=id, auth=self.auth)
+        assert saved_search.status_code == 200
 
-        new_value = {"filter": "filter_value"}
+        new_value = {"filter1": "filter_value"}
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='filter',
                                             new_value=new_value)
         assert updated_saved_search.status_code == 400
@@ -156,7 +151,6 @@ class TestUpdateSavedSearch(TestBase):
         """Tests updating asset_types field of an already-existing saved search
         with an invalid value returns error"""
         id = new_saved_search['id']
-        print(f"Search id is {id}")
         print(f"Current saved search \n{new_saved_search}")
         saved_search = APIHelper.get_saved_search(
             self, search_id=id, auth=self.auth)
