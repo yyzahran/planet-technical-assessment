@@ -62,7 +62,7 @@ The API Key is not on the repository for security, so that only those who have t
 In this section, you'll see how I tackled each of the test cases/objectives provided.
 
 ### Challenge 1
-
+In the `response_schema` in `conftest.py`, I was having troubles with asserting the GET response schema as the `last_executed` field should be of type string, but it always returned `None`. That was because all the searches I create for testing are 'dummy' and not actually used so I added the type of that field in the schema to be `null`. I verified that other real-life saved searched has the proper `last_-_executed` field by calling the list searches endpoint (https://api.planet.com/data/v1/searches) and checking that that field in of type `string` when used.
 ### Challenge 2
 
 ### Challenge 3

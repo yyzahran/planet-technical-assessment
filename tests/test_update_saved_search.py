@@ -1,5 +1,4 @@
 import pytest
-import json
 from modules.APIHelper import APIHelper
 from test_base import TestBase
 
@@ -46,15 +45,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value="Updated saved search name"
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='name',
                                             new_value=new_value)
-        ##
-        # new_value = 'Updated saved search name'
-        # updated_json_body = json_data
-        # updated_json_body['name'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
-        ##
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json(
         )['name'] == new_value, f"Field was not updated, expected {new_value}, instead found {updated_saved_search['name']}."
@@ -71,15 +61,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value = False
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='__daily_email_enabled',
                                             new_value=new_value)
-        #
-        # updated_json_body = json_data
-        # updated_json_body['__daily_email_enabled'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
-        #
-
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json()['__daily_email_enabled'] == new_value, \
             f"Field was not updated, expected {new_value}, instead found {updated_saved_search['__daily_email_enabled']}."
@@ -109,12 +90,6 @@ class TestUpdateSavedSearch(TestBase):
         }
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='filter',
                                             new_value=new_value)
-        # updated_json_body = json_data
-        # updated_json_body['filter'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.status_code == 200
         assert updated_saved_search.json()['filter'] == new_value, \
             f"Field was not updated, expected {new_value}, instead found {updated_saved_search['filter']}."
@@ -131,12 +106,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value = ["ortho_analytic_8b_xml", "ortho_udm2", "ortho_visual"]
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='asset_types',
                                             new_value=new_value)
-        # updated_json_body = json_data
-        # updated_json_body['asset_types'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.json()['asset_types'] == new_value, \
             f"Field was not updated, expected {new_value}, instead found {updated_saved_search['asset_types']}."
         assert updated_saved_search.status_code == 200
@@ -154,12 +123,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value = ["New name in a list"]
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='name',
                                             new_value=new_value)
-        # updated_json_body = json_data
-        # updated_json_body['name'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.status_code == 400
 
     def test_update_daily_email_enabled_field_with_invalid_value_returns_error(self, new_saved_search, json_data):
@@ -175,12 +138,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value = "False"
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='__daily_email_enabled',
                                             new_value=new_value)
-        # updated_json_body = json_data
-        # updated_json_body['__daily_email_enabled'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.status_code == 400
 
     def test_update_filter_field_with_an_invalid_value_returns_error(self, new_saved_search, json_data):
@@ -193,13 +150,6 @@ class TestUpdateSavedSearch(TestBase):
         new_value = {"filter": "filter_value"}
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='filter',
                                             new_value=new_value)
-
-        # updated_json_body = json_data
-        # updated_json_body['filter'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.status_code == 400
 
     def test_update_asset_types_field_with_an_invalid_value_returns_error(self, new_saved_search, json_data):
@@ -215,10 +165,4 @@ class TestUpdateSavedSearch(TestBase):
         new_value = ["asset_type_1", "asset_type_3", "asset_type_5"]
         updated_saved_search = self.update_field(hash_map=json_data, search_id=id, key='asset_types',
                                             new_value=new_value)
-        # updated_json_body = json_data
-        # updated_json_body['asset_types'] = new_value
-        # print(f"Updated saved search \n{updated_json_body}")
-
-        # updated_saved_search = APIHelper.update_saved_search(
-        #     self, json=json_data, search_id=id, auth=self.auth)
         assert updated_saved_search.status_code == 400
