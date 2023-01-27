@@ -15,8 +15,6 @@ Here I'll walk you through the approach I took while working on the assessment.
         <li><a href="#test-case-1">Challenge 2</a></li>
         <li><a href="#test-case-1">Challenge 3</a></li>
         <li><a href="#test-case-1">Challenge 4</a></li>
-        <li><a href="#test-case-1">Challenge 5</a></li>
-        <li><a href="#test-case-1">Challenge 6</a></li>
       </ul>
     </li>
     <li><a href="#to-the-reviewers">To the reviewers</a></li>
@@ -68,7 +66,7 @@ In the `response_schema` in `conftest.py`, I was having troubles with asserting 
 ### Challenge 2
 I tried to utilize helper methods and fixtures as much as I could as well as adding global variables whenever I can. However, I didn't want to go overboard so as not to affect the readability of the project. For example, I thought about adding global parameters with the different status codes I expected, but I felt that that would be confusing and the user/reviewer will have to resort back to different files to check what each variable means. Sometimes leaving parameters compartmentalized within the test can be easier to maintain.
 ### Challenge 3
-I opted for making the most out of every test by
+I opted for making the most out of every test by adding more than just one assertion instead of adding each assertion to a separate test for the sake of scalability and executanility of the project. For example in a test case where I'd test creating a saved search, I create the search, then assert its GET response and validate its schema instead of adding the latter two in other separate tests.
 
 ### Challenge 4
 
