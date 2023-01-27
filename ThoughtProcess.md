@@ -54,24 +54,24 @@ After doing some research and going through the documentation, I crafted a reque
 
 When starting the tests, I added a test base class as a parent to include the authorization for the requests and base url so as not to add it to every test file/class. From there, I was able to start writing test cases for creating, updating, and deleting saved searches. I usually write the happy scenarios first and then add the negative test cases to increase the coverage.
 
+Lastly, I added jsonschema validation to verify the reponse schema when creating a saved search.
+
 The API Key is not on the repository for security, so that only those who have the API key can use the tests and connect to the API endpoints.
 <br />
 
 ## Challenges
 
-In this section, you'll see how I tackled each of the test cases/objectives provided.
+In this section, I'll mention breifly the challneges that I faced while working on the assessment.
 
 ### Challenge 1
 In the `response_schema` in `conftest.py`, I was having troubles with asserting the GET response schema as the `last_executed` field should be of type string, but it always returned `None`. That was because all the searches I create for testing are 'dummy' and not actually used so I added the type of that field in the schema to be `null`. I verified that other real-life saved searched has the proper `last_-_executed` field by calling the list searches endpoint (https://api.planet.com/data/v1/searches) and checking that that field in of type `string` when used.
 ### Challenge 2
-
+I tried to utilize helper methods and fixtures as much as I could as well as adding global variables whenever I can. However, I didn't want to go overboard so as not to affect the readability of the project. For example, I thought about adding global parameters with the different status codes I expected, but I felt that that would be confusing and the user/reviewer will have to resort back to different files to check what each variable means. Sometimes leaving parameters compartmentalized within the test can be easier to maintain.
 ### Challenge 3
+I opted for making the most out of every test by
 
 ### Challenge 4
 
-### Challenge 5
-
-### Challenge 6
 <br />
 
 ## To the reviewers
