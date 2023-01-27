@@ -2,7 +2,7 @@
 <h1 align="center">Planet's Technical Assessment</h1>
 
   <p align="center">
-    A Python-based test framework that automates the objectives outlined by Planet in <a href="https://github.com/yyzahran/planet-technical-assessment/blob/master/QE_Guide.pdf">QE-guide</a>
+    A Python-based test framework that automates the objectives outlined by Planet in the guide.
     <br />
     <br />
   </p>
